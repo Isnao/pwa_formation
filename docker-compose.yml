@@ -1,7 +1,11 @@
 services:
   web:
-    build: 
-      context: .
-      dockerfile: Dockerfile.dev
+    build: node:22-alpine
+    command: pnpm run dev
     ports:
       - "80:80"
+    volumes:
+      - .:/app
+    environment:
+      - HOST=0.0.0.0
+      - PORT=80
