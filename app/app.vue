@@ -1,6 +1,5 @@
 <template>
-  <div>
-    <NuxtPwaManifest />
+  <UApp>
     <NuxtPage />
-  </div>
+  </UApp>
 </template>

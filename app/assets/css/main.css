@@ -1,0 +1,27 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+    --font-sans: Inter;
+
+    --color-primary-50: #e9dad8;
+    --color-primary-100: #e9dad8;
+    --color-primary-200: #e9dad8;
+    --color-primary-300: #e9dad8;
+    --color-primary-400: #e9dad8;
+    --color-primary-500: #e9dad8;
+    --color-primary-600: #bbaaa6;
+    --color-primary-700: #bbaaa6;
+    --color-primary-800: #bbaaa6;
+    --color-primary-900: #a79895;
+    --color-primary-950: #7E848D;
+}
+
+:root{
+    --ui-primary: var(--color-primary-400);
+    --ui-secondary: var(--color-primary-700)
+}
+
+body{
+    background-color: var(--ui-primary);
+}

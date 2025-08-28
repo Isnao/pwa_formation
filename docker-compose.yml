@@ -2,10 +2,11 @@ services:
   web:
     build: node:22-alpine
     command: pnpm run dev
+    user: ${CURRENT_UID:?" --- Please run as follows 'CURRENT_UID=$$(id -u):$$(id -g) docker compose -f docker-compose.yml -f docker-compose.dev.yml up'"}
     ports:
       - "80:80"
     volumes:
-      - .:/app
+      - .:/app:rw,cached
     environment:
       - HOST=0.0.0.0
       - PORT=80

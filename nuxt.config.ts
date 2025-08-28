@@ -4,9 +4,11 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: [
     '@nuxt/eslint',
+    '@nuxtjs/google-fonts',
     '@nuxt/ui',
     '@vite-pwa/nuxt'
   ],
+  css: ['~/assets/css/main.css'],
   pwa: {
     registerType: 'autoUpdate',
     manifest: {
@@ -29,6 +31,12 @@ export default defineNuxtConfig({
     },
     devOptions: {
       enabled: true
+    }
+  },
+  googleFonts: {
+    families: {
+      Inter: true,
+      'Baloo Thambi 2': true
     }
   }
 })
