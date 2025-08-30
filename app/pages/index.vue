@@ -56,7 +56,7 @@ useHead({
   flex-direction: column;
   align-items: center;
   gap: 3rem;
-  padding: 3rem 2rem;
+  padding: 3rem;
 
   &-top{
     display: flex;

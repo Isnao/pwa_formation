@@ -2,12 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
-  modules: [
-    '@nuxt/eslint',
-    '@nuxtjs/google-fonts',
-    '@nuxt/ui',
-    '@vite-pwa/nuxt'
-  ],
+  modules: ['@nuxt/eslint', '@nuxtjs/google-fonts', '@nuxt/ui', '@vite-pwa/nuxt', '@pinia/nuxt'],
   css: ['~/assets/css/main.css'],
   pwa: {
     registerType: 'autoUpdate',
@@ -38,5 +33,8 @@ export default defineNuxtConfig({
       Inter: true,
       'Baloo Thambi 2': true
     }
-  }
+  },
+  pinia: {
+    storesDirs: ['./app/stores/**'],
+  },
 })

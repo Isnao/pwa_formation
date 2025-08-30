@@ -3,6 +3,7 @@
 
 @theme static {
     --font-sans: Inter;
+    --font-mono: 'Baloo Thambi 2';
 
     --color-primary-50: #e9dad8;
     --color-primary-100: #e9dad8;
@@ -14,7 +15,9 @@
     --color-primary-700: #bbaaa6;
     --color-primary-800: #bbaaa6;
     --color-primary-900: #a79895;
-    --color-primary-950: #7E848D;
+    --color-primary-950: #615957;
+
+    --ui-bg: #2c2625;
 }
 
 :root{
