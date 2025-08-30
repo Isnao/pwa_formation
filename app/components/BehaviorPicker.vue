@@ -9,6 +9,14 @@ const behavior = defineModel({
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const modelValue = shallowRef<any>([])
 
+function resetBehaviors() {
+    modelValue.value = []
+}
+
+defineExpose({
+    resetBehaviors
+})
+
 const value = computed(() => {
     const parents = modelValue.value.filter((elem: TreeItem) => elem.children?.length )
 
@@ -40,7 +48,7 @@ const items: TreeItem[] = behaviors.behaviorList.map((elem) => ({
         :ui="{ footer: 'justify-end' }"
         @after:leave="submit"
     >
-        <UButton color="secondary">
+        <UButton color="secondary" size="xl" class="max-w-lg">
             {{ value !== '' ? value : 'Choisir ses comportements' }}
         </UButton>
 
@@ -49,6 +57,7 @@ const items: TreeItem[] = behaviors.behaviorList.map((elem) => ({
         </template>
 
         <template #footer="{ close }">
+            <UButton label="Vider" variant="ghost" @click="resetBehaviors" />
             <UButton label="Valider" color="neutral" @click="close" />
         </template>
     </UModal>

@@ -16,8 +16,8 @@ const props = defineProps({
 </script>
 
 <template>
-    <div class="flex flex-col items-center min-w-lg">
-        <div class="flex flex-row justify-evenly min-w-lg items-end">
+    <div class="flex flex-col items-center max-w-lg w-full">
+        <div class="flex flex-row justify-evenly w-full items-end">
             <span class="text-6xl text-violet-900 font-mono font-bold">{{ props.first }}</span>
             <span class="text-4xl text-blue-400 font-mono">{{ props.second }}</span>
         </div>

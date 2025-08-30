@@ -25,7 +25,7 @@ export default defineNuxtConfig({
       ]
     },
     devOptions: {
-      enabled: true
+      enabled: process.env.NODE_ENV !== 'production'
     }
   },
   googleFonts: {
@@ -37,4 +37,12 @@ export default defineNuxtConfig({
   pinia: {
     storesDirs: ['./app/stores/**'],
   },
+  ssr: true,
+  experimental: {
+    asyncEntry: true,
+    renderJsonPayloads: false
+  },
+  features: {
+    inlineStyles: true
+  }
 })

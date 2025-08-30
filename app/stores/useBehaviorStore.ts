@@ -32,7 +32,7 @@ export const useBehaviorStore = defineStore('behavior', () => {
                 'Poke',
                 'Attends',
                 'Tu laisse',
-                'Saut/Desc',
+                'Saut Desc',
                 'Roule',
                 'À droite',
                 'Recule'

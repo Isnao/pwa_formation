@@ -1,7 +1,9 @@
-import { defineStore } from "pinia";
+import { defineStore } from "pinia"
+import { getLocalTimeZone } from '@internationalized/date'
+import type { DateValue } from '@internationalized/date'
 
 interface ISession {
-    date: Date
+    date: DateValue
     behavior: string
     objective: string
     details: string
@@ -27,12 +29,12 @@ export const useSessionsStore = defineStore('session', () => {
 
     function addSession(payload: ISession) {
         sessionList.value.push(payload)
-        sessionList.value.sort((elemA, elemB) => elemA.date.getTime() - elemB.date.getTime())
+        sessionList.value.sort((elemA, elemB) => elemA.date.compare(elemB.date))
         setLocalStorage()
     }
 
     function export2CSV() {
-        const data = sessionList.value.map((elem) => `${elem.date.toISOString()};${elem.behavior};${elem.objective};${elem.details};${elem.timing.toString()};${elem.isReached ? 'OUI' : 'NON'}`).join('\n')
+        const data = sessionList.value.map((elem) => `${elem.date.toDate(getLocalTimeZone())};${elem.behavior};${elem.objective};${elem.details};${elem.timing.toString()};${elem.isReached ? 'OUI' : 'NON'}`).join('\n')
         const blob = new Blob([data], { type: 'text/csv' })
         const fileURL = URL.createObjectURL(blob)
         const downloadLink = document.createElement('a')
