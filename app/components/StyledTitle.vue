@@ -17,9 +17,9 @@ const props = defineProps({
 
 <template>
     <div class="flex flex-col items-center max-w-lg w-full">
-        <div class="flex flex-row justify-evenly w-full items-end">
+        <div class="flex flex-row w-full items-end">
             <span class="text-6xl text-violet-900 font-mono font-bold">{{ props.first }}</span>
-            <span class="text-4xl text-blue-400 font-mono">{{ props.second }}</span>
+            <span class="text-4xl text-blue-400 font-mono inline-flex w-full justify-center">{{ props.second }}</span>
         </div>
         <div class="text-6xl text-lime-500 self-end font-mono font-bold">
             {{ props.third }}
