@@ -4,7 +4,24 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/eslint', '@nuxtjs/google-fonts', '@nuxt/ui', '@vite-pwa/nuxt', '@pinia/nuxt'],
   css: ['~/assets/css/main.css'],
+  nitro: {
+    esbuild: {
+      options: {
+        target: 'esnext'
+      }
+    },
+    prerender: {
+      routes: ['/']
+    }
+  },
+  imports: {
+    autoImport: true
+  },
+  appConfig: {
+    buildDate: new Date().toISOString()
+  },
   pwa: {
+    strategies: 'generateSW',
     registerType: 'autoUpdate',
     manifest: {
       name: 'Application Formation Acadia',
@@ -24,6 +41,16 @@ export default defineNuxtConfig({
         },
       ]
     },
+    workbox: {
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
+    },
+    injectManifest: {
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
+    },
+    client: {
+      installPrompt: true,
+      periodicSyncForUpdates: 86400,
+    },
     devOptions: {
       enabled: process.env.NODE_ENV !== 'production'
     }
@@ -39,10 +66,14 @@ export default defineNuxtConfig({
   },
   ssr: true,
   experimental: {
+    payloadExtraction: true,
+    appManifest: true,
     asyncEntry: true,
-    renderJsonPayloads: false
   },
   features: {
     inlineStyles: true
+  },
+  future: {
+    typescriptBundlerResolution: true
   }
 })
