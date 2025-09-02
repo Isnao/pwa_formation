@@ -23,7 +23,7 @@ export default defineNuxtConfig({
       }
     },
     prerender: {
-      routes: ['/', '/session']
+      routes: ['/']
     }
   },
   imports: {
@@ -38,6 +38,7 @@ export default defineNuxtConfig({
       short_name: 'FormationAcadia',
       description: "Application pour aider à la formation de l'association Acadia",
       theme_color: '#E9DAD8',
+      lang: 'fr',
       icons: [
         {
           src: 'pwa-192x192.png',
@@ -97,6 +98,9 @@ export default defineNuxtConfig({
         }
       ],
       globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
+    },
+    client: {
+      installPrompt: true
     },
     devOptions: {
       enabled: process.env.NODE_ENV !== 'production'

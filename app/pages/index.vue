@@ -1,6 +1,19 @@
 <script setup lang="ts">
 import { UButton, ULink, UModal } from '#components';
 
+const { $pwa } = useNuxtApp()
+const toast = useToast()
+
+onMounted(() => {
+  if ($pwa?.showInstallPrompt && !$pwa.offlineReady && !$pwa.needRefresh) {
+    toast.add({
+      title: 'Pour installer l\'application, veuillez cliquer ici',
+      color: 'info',
+      actions: [{ label: 'Installer', onClick: () => {$pwa.install()} }]
+    })
+  }
+})
+
 useHead({
   title: 'Application Formation Acadia',
   meta: [
