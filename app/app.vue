@@ -1,7 +1,8 @@
 <template>
-  <UApp>
+  <div>
     <NuxtPwaManifest />
-    <NuxtLoadingIndicator />
-    <NuxtPage />
-  </UApp>
+    <UApp>
+      <NuxtPage />
+    </UApp>
+  </div>
 </template>

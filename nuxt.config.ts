@@ -4,6 +4,18 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   modules: ['@nuxt/eslint', '@nuxtjs/google-fonts', '@nuxt/ui', '@vite-pwa/nuxt', '@pinia/nuxt'],
   css: ['~/assets/css/main.css'],
+  app: {
+    head: {
+      meta: [
+        { name: 'theme-color', content: '#E9DAD8' }
+      ],
+      link: [
+        { rel: 'icon', href: '/favicon.ico' },
+        { rel: 'icon', href: '/favicon.svg', type: 'image/svg+xml', sizes: 'any' },
+        { rel: 'apple-touch-icon', href: '/apple-touch-icon.png' }
+      ]
+    }
+  },
   nitro: {
     esbuild: {
       options: {
@@ -11,18 +23,16 @@ export default defineNuxtConfig({
       }
     },
     prerender: {
-      routes: ['/']
+      routes: ['/', '/session']
     }
   },
   imports: {
     autoImport: true
   },
-  appConfig: {
-    buildDate: new Date().toISOString()
-  },
   pwa: {
     strategies: 'generateSW',
     registerType: 'autoUpdate',
+    includeAssets: ['favicon.ico', 'favicon.svg', 'apple-touch-icon.png'],
     manifest: {
       name: 'Application Formation Acadia',
       short_name: 'FormationAcadia',
@@ -30,26 +40,63 @@ export default defineNuxtConfig({
       theme_color: '#E9DAD8',
       icons: [
         {
-          src: 'ic_launcher_icon_192.png',
+          src: 'pwa-192x192.png',
           sizes: '192x192',
-          type: 'image/png'
+          type: 'image/png',
+          purpose: 'any'
         },
         {
-          src: 'ic_launcher_icon_512.png',
+          src: 'pwa-512x512.png',
           sizes: '512x512',
-          type: 'image/png'
+          type: 'image/png',
+          purpose: 'any'
+        },
+        {
+          src: 'pwa-maskable-192x192.png',
+          sizes: '192x192',
+          type: 'image/png',
+          purpose: 'maskable'
+        },
+        {
+          src: 'pwa-maskable-512x512.png',
+          sizes: '512x512',
+          type: 'image/png',
+          purpose: 'maskable'
         },
       ]
     },
     workbox: {
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
-    },
-    injectManifest: {
-      globPatterns: ['**/*.{js,css,html,png,svg,ico}']
-    },
-    client: {
-      installPrompt: true,
-      periodicSyncForUpdates: 86400,
+      runtimeCaching: [
+        {
+          urlPattern: /^https:\/\/fonts\.googleapis\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'google-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        },
+        {
+          urlPattern: /^https:\/\/fonts\.gstatic\.com\/.*/i,
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'gstatic-fonts-cache',
+            expiration: {
+              maxEntries: 10,
+              maxAgeSeconds: 60 * 60 * 24 * 365
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        }
+      ],
+      globPatterns: ['**/*.{js,css,html,png,svg,ico}'],
     },
     devOptions: {
       enabled: process.env.NODE_ENV !== 'production'
@@ -67,11 +114,6 @@ export default defineNuxtConfig({
   ssr: true,
   experimental: {
     payloadExtraction: true,
-    appManifest: true,
-    asyncEntry: true,
-  },
-  features: {
-    inlineStyles: true
   },
   future: {
     typescriptBundlerResolution: true

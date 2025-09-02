@@ -57,13 +57,16 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
         <UFormField name="behavior" required>
             <BehaviorPicker ref="behaviorPicker" v-model="state.behavior" />
         </UFormField>
-        <UFormField name="objective" required class="w-full max-w-lg px-8">
-            <UInput v-model="state.objective" placeholder="" color="secondary" highlight size="xl" :ui="{ base: 'peer bg-primary-400 text-black', root: 'w-full' }">
-                <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
-                    <span class="inline-flex bg-primary-400 text-black px-1">Objectif</span>
-                </label>
-            </UInput>
-        </UFormField>
+        <div class="flex flex-row justify-between gap-2 w-full max-w-lg px-8">
+            <UFormField name="objective" required class="flex-1">
+                <UInput v-model="state.objective" placeholder="" color="secondary" highlight size="xl" :ui="{ base: 'peer bg-primary-400 text-black', root: 'w-full' }">
+                    <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
+                        <span class="inline-flex bg-primary-400 text-black px-1">Objectif</span>
+                    </label>
+                </UInput>
+            </UFormField>
+            <UButton icon="i-lucide-circle-help" @click="toast.add({ title: 'L\'objectif est le reflet de vos étapes de travail, du nombre de répétitions à réussir pour passer d\'une étape à l\'autre, des 3 D à faire évoluer … Il vous permet de recentrer votre séance au besoin.', color: 'info' })" />
+        </div>
         <UFormField name="details" class="w-full max-w-lg px-8">
             <UTextarea v-model="state.details" placeholder="" autoresize :maxrows="4" color="secondary" highlight size="xl" :ui="{ base: 'peer bg-primary-400 text-black', root: 'w-full' }">
                 <label class="pointer-events-none absolute left-0 -top-2.5 text-highlighted text-xs font-medium px-1.5 transition-all peer-focus:-top-2.5 peer-focus:text-highlighted peer-focus:text-xs peer-focus:font-medium peer-placeholder-shown:text-sm peer-placeholder-shown:text-dimmed peer-placeholder-shown:top-1.5 peer-placeholder-shown:font-normal">
