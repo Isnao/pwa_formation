@@ -5,7 +5,7 @@
     --font-sans: Inter;
     --font-mono: 'Baloo Thambi 2';
 
-    --color-primary-50: #e9dad8;
+    --color-primary-50: rgb(245, 232, 230);
     --color-primary-100: #e9dad8;
     --color-primary-200: #e9dad8;
     --color-primary-300: #e9dad8;
@@ -16,13 +16,16 @@
     --color-primary-800: #bbaaa6;
     --color-primary-900: #a79895;
     --color-primary-950: #615957;
-
-    --ui-bg: #2c2625;
 }
 
 :root{
     --ui-primary: var(--color-primary-400);
-    --ui-secondary: var(--color-primary-700)
+    --ui-secondary: var(--color-primary-700);
+    --ui-bg-accented: var(--color-primary-50);
+    @media (prefers-color-scheme:dark) {
+        --ui-bg-accented: var(--color-primary-900);
+    }
+    --shadow-home: 0rem 0.4rem 0.4rem 0rem var(--color-primary-950);
 }
 
 body{

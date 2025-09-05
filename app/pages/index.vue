@@ -12,6 +12,13 @@ onMounted(() => {
       actions: [{ label: 'Installer', onClick: () => {$pwa.install()} }]
     })
   }
+  if ($pwa?.needRefresh) {
+    toast.add({
+      title: 'Une mise à jour est disponible, veuillez cliquer ici',
+      color: 'warning',
+      actions: [{ label: 'Mettre à jour', onClick: () => {$pwa.updateServiceWorker()} }]
+    })
+  }
 })
 
 useHead({
@@ -23,27 +30,27 @@ useHead({
 </script>
 
 <template>
-  <div class="p-home">
-    <div class="p-home-top">
-      <div class="p-home-title text-black">
-        <div class="p-home-title__first">
+  <div class="flex flex-col items-center gap-12 p-12">
+    <div class="flex flex-col items-center gap-2">
+      <div class="flex flex-col items-center text-black">
+        <div class="text-[2rem] uppercase">
           Prêt pour
         </div>
-        <div class="p-home-title__second">
+        <div class="text-[3rem] uppercase">
           l'aventure
         </div>
       </div>
-      <div class="p-home-brand">
-        <span class="p-home-brand__A">A</span>
-        <span class="p-home-brand__CA">CA</span>
-        <span class="p-home-brand__DIA">DIA</span>
+      <div class="text-[4rem] font-mono font-bold">
+        <span class="text-violet-900">A</span>
+        <span class="text-blue-400">CA</span>
+        <span class="text-lime-500">DIA</span>
       </div>
-      <img class="p-home-logo" src="/ic_launcher_icon_512.png" />
+      <img class="w-28 bg-primary-700 rounded-full" src="/ic_launcher_icon_512.png" />
     </div>
-    <div class="p-home-buttons">
-      <UButton to="/session" color="secondary" class="p-home-button text-2xl">Commencer une session</UButton>
-      <UButton to="/bilan" color="secondary" class="p-home-button text-2xl">Bilan des compétences</UButton>
-      <UButton to="/list" color="secondary" class="p-home-button text-2xl">Liste des sessions</UButton>
+    <div class="flex flex-col items-center gap-12">
+      <UButton to="/session" color="secondary" class="rounded-2xl p-4 w-full justify-center text-black text-2xl shadow-(--shadow-home)">Commencer une session</UButton>
+      <UButton to="/bilan" color="secondary" class="rounded-2xl p-4 w-full justify-center text-black text-2xl shadow-(--shadow-home)">Bilan des compétences</UButton>
+      <UButton to="/list" color="secondary" class="rounded-2xl p-4 w-full justify-center text-black text-2xl shadow-(--shadow-home)">Liste des sessions</UButton>
     </div>
     <UModal
       title="Connexion"
@@ -62,77 +69,3 @@ useHead({
     </UModal>
   </div>
 </template>
-
-<style lang="scss">
-.p-home{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 3rem;
-  padding: 3rem;
-
-  &-top{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-  
-  &-title{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-
-    &__first{
-      font-size: 2rem;
-      text-transform: uppercase;
-    }
-
-    &__second{
-      font-size: 3rem;
-      text-transform: uppercase;
-    }
-  }
-
-  &-brand{
-    font-size: 4rem;
-    font-family: 'Baloo Thambi 2';
-    font-weight: 700;
-
-    &__A{
-      color: #562583
-    }
-
-    &__CA{
-      color: #2486C8
-    }
-
-    &__DIA{
-      color: #84bf2c
-    }
-  }
-
-  &-logo{
-    width: 7rem;
-    background-color: var(--ui-secondary);
-    border-radius: 50%;
-  }
-
-  &-buttons{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
-  }
-
-  &-button{
-    box-shadow: 0rem 0.4rem 0.4rem 0rem var(--color-primary-950);
-    border-radius: 1rem;
-    padding: 1rem;
-    width: 100%;
-    cursor: pointer;
-    justify-content: center;
-  }
-}
-
-</style>

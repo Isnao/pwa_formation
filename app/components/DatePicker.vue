@@ -13,7 +13,7 @@ const modelValue = defineModel<any>({})
 
 <template>
     <UPopover>
-        <UButton color="secondary" icon="i-lucide-calendar" size="xl">
+        <UButton color="secondary" icon="i-lucide-calendar" size="xl" class="text-black">
             {{ modelValue ? df.format((modelValue as DateValue).toDate(getLocalTimeZone())) : 'Choisir une date' }}
         </UButton>
 

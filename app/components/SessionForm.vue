@@ -65,7 +65,7 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
                     </label>
                 </UInput>
             </UFormField>
-            <UButton icon="i-lucide-circle-help" @click="toast.add({ title: 'L\'objectif est le reflet de vos étapes de travail, du nombre de répétitions à réussir pour passer d\'une étape à l\'autre, des 3 D à faire évoluer … Il vous permet de recentrer votre séance au besoin.', color: 'info' })" />
+            <UButton icon="i-lucide-circle-help"  class="text-black" @click="toast.add({ title: 'L\'objectif est le reflet de vos étapes de travail, du nombre de répétitions à réussir pour passer d\'une étape à l\'autre, des 3 D à faire évoluer … Il vous permet de recentrer votre séance au besoin.', color: 'info' })" />
         </div>
         <UFormField name="details" class="w-full max-w-lg px-8">
             <UTextarea v-model="state.details" placeholder="" autoresize :maxrows="4" color="secondary" highlight size="xl" :ui="{ base: 'peer bg-primary-400 text-black', root: 'w-full' }">
@@ -84,10 +84,10 @@ async function onSubmit(event: FormSubmitEvent<typeof state>) {
             </UTooltip>
         </UFormField>
         <UFormField name="isReached" label="Objectif validé" :ui="{ label: 'text-black' }">
-            <USwitch v-model="state.isReached" placeholder="" color="success" size="xl" :ui="{ base: 'peer bg-primary-400 data-[state=unchecked]:bg-violet-900 data-[state=checked]:bg-lime-500', root: 'justify-center' }" />
+            <USwitch v-model="state.isReached" placeholder="" size="xl" :ui="{ base: 'peer bg-primary-400 data-[state=unchecked]:bg-violet-900 data-[state=checked]:bg-lime-500', root: 'justify-center' }" />
         </UFormField>
 
-        <UButton type="submit" color="secondary" size="xl" class="w-fit ">
+        <UButton type="submit" color="secondary" size="xl" class="w-fit text-black">
             Enregistrer
         </UButton>
     </UForm>

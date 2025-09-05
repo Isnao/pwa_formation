@@ -51,8 +51,7 @@ const groups = computed(() => {
             :groups="groups"
             :fuse="{ fuseOptions: { includeMatches: true } }"
             placeholder="Rechercher une session pour plus de détails"
-            class="bg-primary-600"
-            :ui="{ label: 'text-black', itemLabelBase: 'text-black', item: 'data-highlighted:not-data-disabled:before:bg-primary-950/50', root: 'rounded-md' }"
+            :ui="{ label: 'text-black', itemLabelBase: 'text-black', item: 'data-highlighted:not-data-disabled:before:bg-primary-900/50', input: 'bg-accented rounded-md' }"
         />
         <UButton label="Exporter" color="secondary" size="xl" class="absolute bottom-4" @click="export2CSV" />
         <UModal v-model:open="open" title="Détail du comportement">
