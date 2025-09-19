@@ -1,8 +1,21 @@
+import type { DateValue } from "@internationalized/date";
 import { defineStore } from "pinia";
 
 interface IBehavior {
     label: string
-    behaviors: string[]
+    behaviors: {
+        name: string
+        report?: {
+            shaping?: DateValue
+            signal?: DateValue
+            duration?: DateValue
+            position?: DateValue
+            distance?: DateValue
+            distraction?: DateValue
+            generalization?: DateValue
+            mastery?: DateValue
+        }
+    }[]
 }
 
 export const useBehaviorStore = defineStore('behavior', () => {
@@ -10,44 +23,128 @@ export const useBehaviorStore = defineStore('behavior', () => {
         {
             label: 'Niveau 1',
             behaviors: [
-                'Nom',
-                'Touche',
-                'Fini',
-                'Assis',
-                'À ta place',
-                'On y va',
-                'Olfact.REC',
-                'Les besoins',
-                'Couché',
-                'À gauche',
-                'Debout',
-                'Viens'
+                { 
+                    name: 'Nom',
+                    report: {}
+                },
+                { 
+                    name: 'Touche',
+                    report: {}
+                },
+                { 
+                    name: 'Fini',
+                    report: {}
+                },
+                { 
+                    name: 'Assis',
+                    report: {}
+                },
+                { 
+                    name: 'À ta place',
+                    report: {}
+                },
+                { 
+                    name: 'On y va',
+                    report: {}
+                },
+                { 
+                    name: 'Olfact.REC',
+                    report: {}
+                },
+                { 
+                    name: 'Les besoins',
+                    report: {}
+                },
+                { 
+                    name: 'Couché',
+                    report: {}
+                },
+                { 
+                    name: 'À gauche',
+                    report: {}
+                },
+                { 
+                    name: 'Debout',
+                    report: {}
+                },
+                { 
+                    name: 'Viens',
+                    report: {}
+                },
             ]
         },
         {
             label: 'Niveau 2',
             behaviors: [
-                'Olfact.DIS',
-                'Dessous',
-                'Poke',
-                'Attends',
-                'Tu laisse',
-                'Saut Desc',
-                'Roule',
-                'À droite',
-                'Recule'
+                { 
+                    name: 'Olfact.DIS',
+                    report: {}
+                },
+                { 
+                    name: 'Dessous',
+                    report: {}
+                },
+                { 
+                    name: 'Poke',
+                    report: {}
+                },
+                { 
+                    name: 'Attends',
+                    report: {}
+                },
+                { 
+                    name: 'Tu laisse',
+                    report: {}
+                },
+                { 
+                    name: 'Saut Desc',
+                    report: {}
+                },
+                { 
+                    name: 'Roule',
+                    report: {}
+                },
+                { 
+                    name: 'À droite',
+                    report: {}
+                },
+                { 
+                    name: 'Recule',
+                    report: {}
+                },
             ]
         },
         {
             label: 'Niveau 3',
             behaviors: [
-                'Alerte',
-                'Genoux',
-                'Va chercher de l\'aide',
-                'Apporte',
-                'Bouton',
-                'Ouvre la porte',
-                'Habille-toi'
+                { 
+                    name: 'Alerte',
+                    report: {}
+                },
+                { 
+                    name: 'Genoux',
+                    report: {}
+                },
+                { 
+                    name: 'Va chercher de l\'aide',
+                    report: {}
+                },
+                { 
+                    name: 'Apporte',
+                    report: {}
+                },
+                { 
+                    name: 'Bouton',
+                    report: {}
+                },
+                { 
+                    name: 'Ouvre la porte',
+                    report: {}
+                },
+                { 
+                    name: 'Habille-toi',
+                    report: {}
+                },
             ]
         }
     ])
@@ -60,7 +157,7 @@ export const useBehaviorStore = defineStore('behavior', () => {
     }
 
     function setLocalStorage() {
-        localStorage.setItem('behavior', JSON.stringify(behaviorList.value))
+        localStorage.setItem('behaviorList', JSON.stringify(behaviorList.value))
     }
 
     getLocalStorage()
@@ -68,8 +165,8 @@ export const useBehaviorStore = defineStore('behavior', () => {
     function addBehavior(payload: { label: string, behavior: string }) {
         behaviorList.value.forEach((elem) => {
             if (elem.label === payload.label) {
-                if (!elem.behaviors.find((item) => item === payload.behavior)) {
-                    elem.behaviors.push(payload.behavior)
+                if (!elem.behaviors.find((item) => item.name === payload.behavior)) {
+                    elem.behaviors.push({ name: payload.behavior })
                 } else {
                     throw new Error('Behavior already exist in this group')
                 }
@@ -81,7 +178,7 @@ export const useBehaviorStore = defineStore('behavior', () => {
     function removeBehavior(payload: {label: string, behavior: string}) {
         behaviorList.value.forEach((elem) => {
             if (elem.label === payload.label) {
-                const index = elem.behaviors.indexOf(payload.behavior)
+                const index = elem.behaviors.indexOf({ name: payload.behavior })
                 if (index > -1) {
                     elem.behaviors.splice(index, 1)
                 } else {
@@ -118,6 +215,28 @@ export const useBehaviorStore = defineStore('behavior', () => {
         setLocalStorage()
     }
 
+    function updateReport(payload: { 
+        level: string, 
+        behavior: string, 
+        reportName: 'shaping' | 'signal' | 'duration' | 'position' | 'distance' | 'distraction' | 'generalization' | 'mastery',
+        value: DateValue | undefined
+    }) {
+        const level = behaviorList.value.find((elem) => elem.label === payload.level)
+        if (level) {
+            const levelIndex = behaviorList.value.indexOf(level)
+            if ( levelIndex > -1 ) {
+                const behavior = level.behaviors.find((elem) => elem.name === payload.behavior)
+                if (behavior) {
+                    const behaviorIndex = level.behaviors.indexOf(behavior)
+                    if ( behaviorIndex > -1 && behaviorList.value[levelIndex]?.behaviors[behaviorIndex]?.report) {
+                        behaviorList.value[levelIndex].behaviors[behaviorIndex].report[payload.reportName] = payload.value
+                        setLocalStorage()
+                    }
+                }
+            }
+        }
+    }
+
     return {
         behaviorList,
         addBehavior,
@@ -125,6 +244,7 @@ export const useBehaviorStore = defineStore('behavior', () => {
         getLocalStorage,
         removeBehavior,
         removeGroup,
-        setLocalStorage
+        setLocalStorage,
+        updateReport
     }
 })

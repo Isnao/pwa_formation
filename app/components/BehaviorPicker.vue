@@ -44,7 +44,7 @@ function submit() {
 const items: TreeItem[] = behaviors.behaviorList.map((elem) => ({
     label: elem.label,
     children: elem.behaviors.map((behav) => ({ 
-        label: behav, 
+        label: behav.name, 
         trailingIcon: 'i-lucide-square',
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         onToggle: (event: any) => {
